@@ -14,7 +14,8 @@
 print.Rttest = function(funObject, ...){
   require(kableExtra)
   kFO = kable(funObject$Data)
-  z = NextMethod(kFO)
+  kCI = kable(funObject$CI)
+  z = NextMethod(c(kFO, kCI))
   class(z) = c("Rttest", class(z))
-  kFO
+  list(df = kFO, ci = kCI)
 }
