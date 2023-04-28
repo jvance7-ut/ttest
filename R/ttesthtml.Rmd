@@ -14,28 +14,28 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(ttest)
-library(ggplot2)
-library(kableExtra)
 
 #generate x and y
 #and set alpha
-set.seed(21)
-x <-rnorm(30,5,2)
-set.seed(23)
-y<- rnorm(30,3,2)
-alpha <- 0.05
+set.seed(32); x=rnorm(30,mean=10,sd=15)
+set.seed(35); y=rnorm(30,mean=8,sd=15)
+ans1=tConstr(x,y,alpha=0.05,independentSamp = TRUE, equalVar = TRUE)
+attr(ans1, "class") ="Rttest"
+print(ans1)
+plot(ans1)
 
-#set function to object
-obj = tConstr(x=x, y=y, alpha=alpha)
+set.seed(32); x=rnorm(30,mean=10,sd=5)
+set.seed(35); y=rnorm(30,mean=8,sd=15)
+ans2=tConstr(x,y,alpha=0.05,independentSamp = TRUE, equalVar = FALSE)
+attr(ans2, "class") ="Rttest"
+print(ans2)
+plot(ans2)
 
-#change class to Rttest
-attr(obj, "class") ="Rttest"
-
-#call function object parts
-class(obj)
-print(obj)
-plot(obj)
-
-shinyOutput(x,y)
+set.seed(32); x=rnorm(30,mean=10,sd=15)
+set.seed(35); y = x+ rnorm(30, 5 ,4)
+ans3=tConstr(x,y,alpha=0.05,independentSamp = FALSE, equalVar = FALSE)
+attr(ans3, "class") ="Rttest"
+print(ans3)
+plot(ans3)
 
 ```
