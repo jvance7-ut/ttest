@@ -5,6 +5,8 @@
 #'
 #' @return Plots dataframe CI
 #'
+#' @import shiny
+#'
 #' @section shiny: The shiny web server will be used.
 #'
 #' @export
