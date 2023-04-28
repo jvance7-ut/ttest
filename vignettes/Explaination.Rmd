@@ -47,6 +47,8 @@ x - x vector
 
 y - y vector
 
+paired - TRUE/FALSE value supplied in input
+
 
 # Print method
 print.Rttest method used to print objects from myttest() of class "Rttest".

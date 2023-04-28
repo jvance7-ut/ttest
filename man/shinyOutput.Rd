@@ -4,7 +4,7 @@
 \alias{shinyOutput}
 \title{Dynamic output using shiny}
 \usage{
-shinyOutput(x, y, ...)
+shinyOutput()
 }
 \value{
 Plots dataframe CI

@@ -70,6 +70,6 @@ myttest = function(x, y, alpha, paired = FALSE){
 
 
   #return the function information in a list
-  list(Data = df, CI = ttest$conf.int,
-       type = testType, nullAccept = accept, x = x, y = y)
+  list(Data = df, CI = ttest$conf.int, type = testType,
+       nullAccept = accept, x = x, y = y, p = paired)
 }

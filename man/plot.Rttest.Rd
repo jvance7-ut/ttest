@@ -4,19 +4,19 @@
 \alias{plot.Rttest}
 \title{Plot Rttest}
 \usage{
-\method{plot}{Rttest}(funObject, i = 5, j = 6, k = 7, l = 8)
+\method{plot}{Rttest}(funObject, i = 5, j = 6, k = 3, l = 7)
 }
 \arguments{
+\item{funObject}{name used when function is run}
+
 \item{i}{x vector from object index}
 
 \item{j}{y vector from object index}
 
-\item{k}{TRUE/FALSE independent value from object index}
-
-\item{l}{TRUE/FALSE equal variance value from object index}
+\item{k}{The test type (i.e. paired, t-test, or Welch)}
 }
 \value{
-dot plot of x and y with test type as the title
+box plot of x and y with test type as the title
 }
 \description{
 Plot Rttest

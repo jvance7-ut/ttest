@@ -7,7 +7,7 @@
 \method{print}{Rttest}(funObject, ...)
 }
 \value{
-a table with the data set
+a table with the data set, the confidence interval, and hypothesis choice
 }
 \description{
 Print method for class Rttest
