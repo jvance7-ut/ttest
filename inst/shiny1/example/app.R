@@ -9,7 +9,12 @@
 
 library(shiny)
 
-if (interactive()){
+set.seed(32)
+x=rnorm(30,mean=10,sd=15)
+set.seed(35)
+y=rnorm(30,mean=8,sd=15)
+
+#if (interactive()){
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
@@ -21,7 +26,7 @@ ui <- fluidPage(
         sidebarPanel(
             sliderInput("alpha",
                         "alpha Level:",
-                        min = 0.001,
+                        min = 0.000,
                         max = 0.500,
                         value = 0.05),
 
@@ -51,27 +56,26 @@ ui <- fluidPage(
         # Show a plot of the generated distribution
         mainPanel(
            plotOutput("distPlot"),
-           textOutput("ci"),
-           verbatimTextOutput("data")
+           textOutput("ci")
         )
     )
 )
 
 # Define server logic required to draw a plot, and print out df and CI
-server <- function(X,Y, output) {
+server <- function(input, output) {
 
     output$distPlot <- renderPlot({
         # generate graph based on variables
-        x    <- X
-        y    <- Y
+        x    <- x
+        y    <- y
         Independent <- c(TRUE, FALSE)
         eqVar <- c(TRUE, FALSE)
 
 
         # draw the plot with the specified input
         plot(y~x,
-            main = ifelse(Independent == FALSE, "Paired t-test",
-                          ifelse(eqVar == TRUE, "Independent, Equal Var t-test",
+            main = ifelse(input$Independent == FALSE, "Paired t-test",
+                          ifelse(input$eqVar == TRUE, "Independent, Equal Var t-test",
                                 "Independent, Unequal var t-test")), col = "blue",
                       pch=19 )
     })
@@ -82,22 +86,22 @@ server <- function(X,Y, output) {
     #Confidence Interval
     output$ci <- renderText({
 
-      x    <- input$x
-      y    <- input$y
+      x    <- x
+      y    <- y
       alpha <- seq(0.000, 0.500, by = 0.05)
       Independent <- c(TRUE, FALSE)
       eqVar <- c(TRUE, FALSE)
 
-    if(Independent==TRUE && eqVar == TRUE){
+    if(input$Independent==TRUE && input$eqVar == TRUE){
       #run the t-test with equal var
-      ttest = t.test(x, y, var.equal = TRUE)
+      ttest = t.test(x, y, var.equal = TRUE, conf.level = 1-input$alpha)
     }
-    else if(Independent==TRUE && eqVar==FALSE){
+    else if(input$Independent==TRUE && input$eqVar==FALSE){
       #run the t-test with unequal var
-      ttest = t.test(x, y, var.equal = FALSE)
+      ttest = t.test(x, y, var.equal = FALSE, conf.level = 1-input$alpha)
     }
     else{
-      ttest = t.test(x, y, paired = TRUE)
+      ttest = t.test(x, y, paired = TRUE, conf.level = 1-input$alpha)
     }
     ttest$conf.int
 
@@ -105,42 +109,9 @@ server <- function(X,Y, output) {
     #output$ci <- ttest$conf.int
 
 
-    #Data
-    output$data<- renderDataTable({
-
-      x    <- input$x
-      y    <- input$y
-      alpha <- seq(0.000, 0.500, by = 0.05)
-      Independent <- c(TRUE, FALSE)
-      eqVar <- c(TRUE, FALSE)
-
-    if(length(x)==length(y)){
-      df = data.frame(x = x, y = y)
-    }
-
-    else if(length(x)<length(y)){
-      xtemp = rep(NA, length(y))
-      for (i in 1:length(x)) {
-        xtemp[i] = x[i]
-      }
-      df = data.frame(x = xtemp, y = y)
-    }
-
-    else{
-      ytemp = rep(NA, length(x))
-      for (i in 1:length(y)) {
-        ytemp[i] = y[i]
-      }
-      df = data.frame(x = x, y = ytemp)
-    }
-      df
-    })
-    #output$data <- df
-
-
 }
 
 # Run the application
 shinyApp(ui = ui, server = server)
 
-}
+#}
