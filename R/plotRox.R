@@ -20,12 +20,13 @@ plot.Rttest = function(funObject, i=5, j=6, k=7, l=8){
   par(mar = c(1, 1, 1, 1))
   Y = funObject[[j]]
   X = funObject[[i]]
+  df = data.frame(x = X, y = Y)
   plotT <- plot(Y~X,
                 main = ifelse(funObject[[k]] == FALSE, "Paired t-test",
                               ifelse(funObject[[l]] == TRUE, "Independent, Equal Var t-test",
                                      "Independent, Unequal var t-test")), col = "blue",
                 pch=19 )
-  gplotT = ggplot(x=X,y=Y) +
+  gplotT = ggplot(df, aes(x=X,y=Y)) +
     geom_point(color = "green") +
     labs(title = ifelse(funObject[[k]] == FALSE, "Paired t-test",
                         ifelse(funObject[[l]] == TRUE, "Independent, Equal Var t-test",
