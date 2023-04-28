@@ -36,5 +36,6 @@ class(obj)
 print(obj)
 plot(obj)
 
-shinyOutput(x, y)
+shinyOutput(x,y)
+
 ```

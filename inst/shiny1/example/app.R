@@ -51,14 +51,14 @@ ui <- fluidPage(
         # Show a plot of the generated distribution
         mainPanel(
            plotOutput("distPlot"),
-           verbatimTextOutput("ci"),
+           textOutput("ci"),
            verbatimTextOutput("data")
         )
     )
 )
 
 # Define server logic required to draw a plot, and print out df and CI
-server <- function(X, Y, output) {
+server <- function(X,Y, output) {
 
     output$distPlot <- renderPlot({
         # generate graph based on variables
@@ -69,21 +69,25 @@ server <- function(X, Y, output) {
 
 
         # draw the plot with the specified input
-        plot(Y~X,
+        plot(y~x,
             main = ifelse(Independent == FALSE, "Paired t-test",
                           ifelse(eqVar == TRUE, "Independent, Equal Var t-test",
                                 "Independent, Unequal var t-test")), col = "blue",
                       pch=19 )
     })
 
-    x    <- X
-    y    <- Y
-    alpha <- seq(0.000, 0.500, by = 0.05)
-    Independent <- c(TRUE, FALSE)
-    eqVar <- c(TRUE, FALSE)
+
 
 
     #Confidence Interval
+    output$ci <- renderText({
+
+      x    <- input$x
+      y    <- input$y
+      alpha <- seq(0.000, 0.500, by = 0.05)
+      Independent <- c(TRUE, FALSE)
+      eqVar <- c(TRUE, FALSE)
+
     if(Independent==TRUE && eqVar == TRUE){
       #run the t-test with equal var
       ttest = t.test(x, y, var.equal = TRUE)
@@ -95,11 +99,21 @@ server <- function(X, Y, output) {
     else{
       ttest = t.test(x, y, paired = TRUE)
     }
+    ttest$conf.int
 
-    output$ci <- ttest$conf.int
+    })
+    #output$ci <- ttest$conf.int
 
 
     #Data
+    output$data<- renderDataTable({
+
+      x    <- input$x
+      y    <- input$y
+      alpha <- seq(0.000, 0.500, by = 0.05)
+      Independent <- c(TRUE, FALSE)
+      eqVar <- c(TRUE, FALSE)
+
     if(length(x)==length(y)){
       df = data.frame(x = x, y = y)
     }
@@ -119,8 +133,9 @@ server <- function(X, Y, output) {
       }
       df = data.frame(x = x, y = ytemp)
     }
-
-    output$data <- df
+      df
+    })
+    #output$data <- df
 
 
 }
