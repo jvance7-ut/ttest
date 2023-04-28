@@ -21,7 +21,7 @@ tConstr = function(x, y, alpha, independentSamp = TRUE, equalVar = TRUE){
   }
   else if(independentSamp==TRUE && equalVar==FALSE){
     #run the t-test with unequal var
-    ttest = t.test(x, y, var.equal = TRUE)
+    ttest = t.test(x, y, var.equal = FALSE)
   }
   else{
     ttest = t.test(x, y, paired = TRUE)
