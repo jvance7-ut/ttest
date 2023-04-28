@@ -4,7 +4,7 @@
 #' @author Jennifer Vance
 #'
 #' @return a table with the data set
-#' @importFrom kableExtra kabel
+#' @importFrom kableExtra kable
 #' @export print.Rttest
 #'
 #' @export

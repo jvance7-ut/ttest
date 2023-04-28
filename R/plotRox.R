@@ -1,5 +1,5 @@
 #' Plot Rttest
-#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 ggplot geom_point labs xlab ylab
 #'
 #' @param funObject
 #' @param i x vector from object index

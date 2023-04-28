@@ -1,8 +1,5 @@
 #' t-test final
 #'
-#' @importFrom kableExtra kable
-#'
-#' @importFrom ggplot2 ggplot
 #'
 #' @param x X Vector (numeric)
 #' @param y Y vector (numeric)
