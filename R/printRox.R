@@ -1,6 +1,7 @@
-#' Print method for class Rttest
+#' @title Print method for class Rttest
 #'
-#' @param funObject
+#' @param funObject object made when myttest() is run
+#' @param ... Additional arguments as needed
 #' @author Jennifer Vance
 #'
 #' @return a table with the data set, the confidence interval, and hypothesis choice
@@ -12,12 +13,7 @@
 #' @examples
 #' \dontrun{print(funObject)}
 print.Rttest = function(funObject, ...){
-  require(kableExtra)
+  library(kableExtra)
   kFO = kable(c(funObject$Data, funObject$CI))
-  #kFO = kable(funObject$Data)
-  #kCI = kable(funObject$CI)
-  #z = NextMethod(kFO)
-  #class(z) = c("Rttest", class(z))
   kFO
-  #list("data frame" = kFO, "interval" = kCI)
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/shinyOutput.R
 \name{shinyOutput}
 \alias{shinyOutput}
-\title{Dynamic output using shiny}
+\title{DynamicShiny}
 \usage{
 shinyOutput()
 }
 \value{
-Plots dataframe CI
+Plots CI
 }
 \description{
-Dynamic output using shiny
+Use widgets to plot and run ttest on x and y.
 }
 \section{shiny}{
  The shiny web server will be used.

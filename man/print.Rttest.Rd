@@ -6,6 +6,11 @@
 \usage{
 \method{print}{Rttest}(funObject, ...)
 }
+\arguments{
+\item{funObject}{object made when myttest() is run}
+
+\item{...}{Additional arguments as needed}
+}
 \value{
 a table with the data set, the confidence interval, and hypothesis choice
 }

@@ -13,6 +13,8 @@
 #' \dontrun{myttest(x=rnorm(30,5,2), y=rnorm(30,3,2), alpha=0.05)}
 myttest = function(x, y, alpha, paired = FALSE){
   library(devtools)
+  t.test = NULL
+  var.test = NULL
 
   if(paired==TRUE){
     ttest = t.test(x, y, paired = TRUE)

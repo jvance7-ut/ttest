@@ -14,6 +14,8 @@
 \item{j}{y vector from object index}
 
 \item{k}{The test type (i.e. paired, t-test, or Welch)}
+
+\item{l}{TRUE/FALSE value for paired}
 }
 \value{
 box plot of x and y with test type as the title

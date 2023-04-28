@@ -1,9 +1,8 @@
-#' @title Dynamic output using shiny
+#' @title DynamicShiny
+#' @description
+#' Use widgets to plot and run ttest on x and y.
 #'
-#'
-#'@desccription Widgets, plot and run ttest on x and y
-#'
-#' @return Plots dataframe CI
+#' @return Plots CI
 #'
 #' @import shiny
 #'

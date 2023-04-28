@@ -1,4 +1,4 @@
-#' Plot Rttest
+#' @title Plot Rttest
 #' @importFrom ggplot2 ggplot geom_boxplot labs xlab
 #' @importFrom reshape2 melt
 #'
@@ -6,9 +6,10 @@
 #' @param i x vector from object index
 #' @param j y vector from object index
 #' @param k The test type (i.e. paired, t-test, or Welch)
+#' @param l TRUE/FALSE value for paired
 #'
 #' @return box plot of x and y with test type as the title
-
+#'
 #' @export plot.Rttest
 #'
 #' @export
@@ -16,7 +17,15 @@
 #' @examples
 #' \dontrun{plot(funObject)}
 plot.Rttest = function(funObject, i=5, j=6, k = 3, l = 7){
-  require(ggplot2)
+
+  boxplot = NULL
+  aes = NULL
+  variable = NULL
+  value = NULL
+
+  library(reshape2)
+
+  library(ggplot2)
   #set margins to be safe
   #par(mar = c(1, 1, 1, 1))
   Y = funObject[[j]]
