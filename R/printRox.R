@@ -13,9 +13,10 @@
 #' \dontrun{print(funObject)}
 print.Rttest = function(funObject, ...){
   require(kableExtra)
+  #kFO = kable(c(funObject$Data, funObject$CI))
   kFO = kable(funObject$Data)
   kCI = kable(funObject$CI)
-  z = NextMethod(c(kFO, kCI))
+  z = NextMethod(kFO)
   class(z) = c("Rttest", class(z))
-  list(df = kFO, ci = kCI)
+  list("data frame" = kFO, "interval" = kCI)
 }
