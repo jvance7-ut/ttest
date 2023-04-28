@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{shinyOutput()}
-shinyOutput<-function(x, y){
+shinyOutput<-function(){
   shiny::runApp(system.file("shiny1/example", package = "ttest"),
                 launch.browser = TRUE)
 }

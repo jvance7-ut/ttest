@@ -3,7 +3,7 @@
 #' @param funObject
 #' @author Jennifer Vance
 #'
-#' @return a table with the data set
+#' @return a table with the data set, the confidence interval, and hypothesis choice
 #' @importFrom kableExtra kable
 #' @export print.Rttest
 #'

@@ -4,8 +4,7 @@
 #' @param funObject
 #' @param i x vector from object index
 #' @param j y vector from object index
-#' @param k TRUE/FALSE independent value from object index
-#' @param l TRUE/FALSE equal variance value from object index
+#' @param k The test type (i.e. paired, t-test, or Welch)
 #'
 #' @return dot plot of x and y with test type as the title
 
@@ -15,22 +14,18 @@
 #'
 #' @examples
 #' \dontrun{plot(funObject)}
-plot.Rttest = function(funObject, i=5, j=6, k=7, l=8){
+plot.Rttest = function(funObject, i=5, j=6, k = 3){
   require(ggplot2)
   par(mar = c(1, 1, 1, 1))
   Y = funObject[[j]]
   X = funObject[[i]]
   df = data.frame(x = X, y = Y)
   plotT <- plot(Y~X,
-                main = ifelse(funObject[[k]] == FALSE, "Paired t-test",
-                              ifelse(funObject[[l]] == TRUE, "Independent, Equal Var t-test",
-                                     "Independent, Unequal var t-test")), col = "blue",
+                main = funObject[[k]], col = "blue",
                 pch=19 )
   gplotT = ggplot(df, aes(x=X,y=Y)) +
     geom_point(color = "green") +
-    labs(title = ifelse(funObject[[k]] == FALSE, "Paired t-test",
-                        ifelse(funObject[[l]] == TRUE, "Independent, Equal Var t-test",
-                               "Independent, Unequal var t-test"))) +
+    labs(title = funObject[[k]]) +
     xlab("X") +
     ylab("Y")
   list(baseR = plotT, ggplot2 = gplotT)

@@ -4,31 +4,50 @@
 #' @param x X Vector (numeric)
 #' @param y Y vector (numeric)
 #' @param alpha alpha/error value (numeric)
-#' @param independentSamp Is independent? (default TRUE)
-#' @param equalVar Has equal variance? (default TRUE)
+#' @param paired Is sample paired? (default FALSE)
 #'
 #' @return t-test and input results
-#' @export tConstr
+#' @export myttest
 #'
 #' @examples
-#' \dontrun{tConstr(x=rnorm(30,5,2), y=rnorm(30,3,2), alpha=0.05)}
-tConstr = function(x, y, alpha, independentSamp = TRUE, equalVar = TRUE){
+#' \dontrun{myttest(x=rnorm(30,5,2), y=rnorm(30,3,2), alpha=0.05)}
+myttest = function(x, y, alpha, paired = FALSE){
   library(devtools)
 
-  if(independentSamp==TRUE && equalVar == TRUE){
-    #run the t-test with equal var
-    ttest = t.test(x, y, var.equal = TRUE)
-  }
-  else if(independentSamp==TRUE && equalVar==FALSE){
-    #run the t-test with unequal var
-    ttest = t.test(x, y, var.equal = FALSE)
+  if(paired==TRUE){
+    ttest = t.test(x, y, paired = TRUE)
+    testType = "Paired"
   }
   else{
-    ttest = t.test(x, y, paired = TRUE)
+    #run an f-test to test variance equivalence
+    ftest = var.test(x,y)
+
+    if(ftest$p.value>=alpha){
+      #run the t-test with equal var
+      ttest = t.test(x, y, var.equal = TRUE)
+      equalVar = TRUE
+      testType = "T-test"
+    }
+    else{
+      #run the t-test with unequal var
+      ttest = t.test(x, y, var.equal = FALSE)
+      equalVar = FALSE
+      testType = "Welch"
+    }
   }
+
+  #accept or reject H0:
+  if(ttest$p.value>=alpha){
+    accept = "Y"
+  }
+  else{
+    accept = "N"
+  }
+
   #create the data frame of x and y
   #x and y won't always be the same length and may return an error
-  #check the lengths of x and y and make corrections to length if needed with NA values
+  #check the lengths of x and y and make corrections to length if
+  #needed with NA values
   if(length(x)==length(y)){
     df = data.frame(x = x, y = y)
   }
@@ -51,6 +70,6 @@ tConstr = function(x, y, alpha, independentSamp = TRUE, equalVar = TRUE){
 
 
   #return the function information in a list
-  list(Data = df, Alpha = alpha, CI = ttest$conf.int, Pvalue = ttest$p.value,
-       x = x, y = y, is = independentSamp, evar = equalVar)
+  list(Data = df, CI = ttest$conf.int,
+       type = testType, nullAccept = accept, x = x, y = y)
 }

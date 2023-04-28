@@ -65,9 +65,11 @@ ui <- fluidPage(
 server <- function(input, output) {
 
     output$distPlot <- renderPlot({
-        # generate graph based on variables
+        #use provided data
         x    <- x
         y    <- y
+
+        # generate graph based on variables
         Independent <- c(TRUE, FALSE)
         eqVar <- c(TRUE, FALSE)
 
@@ -85,9 +87,11 @@ server <- function(input, output) {
 
     #Confidence Interval
     output$ci <- renderText({
-
+      #use provided data
       x    <- x
       y    <- y
+
+      # generate CI based on variables
       alpha <- seq(0.000, 0.500, by = 0.05)
       Independent <- c(TRUE, FALSE)
       eqVar <- c(TRUE, FALSE)
@@ -101,6 +105,7 @@ server <- function(input, output) {
       ttest = t.test(x, y, var.equal = FALSE, conf.level = 1-input$alpha)
     }
     else{
+      #run the t-test as paired
       ttest = t.test(x, y, paired = TRUE, conf.level = 1-input$alpha)
     }
     ttest$conf.int
