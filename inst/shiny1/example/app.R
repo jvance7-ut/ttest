@@ -14,7 +14,7 @@ x=rnorm(30,mean=10,sd=15)
 set.seed(35)
 y=rnorm(30,mean=8,sd=15)
 
-#if (interactive()){
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
@@ -106,7 +106,6 @@ server <- function(input, output) {
     ttest$conf.int
 
     })
-    #output$ci <- ttest$conf.int
 
 
 }
@@ -114,4 +113,3 @@ server <- function(input, output) {
 # Run the application
 shinyApp(ui = ui, server = server)
 
-#}
