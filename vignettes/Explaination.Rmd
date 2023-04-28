@@ -78,10 +78,14 @@ i, j - x and y vectors from object index
 
 k - test type: "paired", "t-test" (equal variance), "Welch" (unequal variance)
 
+l - TRUE/FALSE value of paired
+
 ** NOT ADVISED TO CHANGE
 
 ## Output
-Dot plots of x and y stating what type of test was used in the title
+box plots of x and y stating what type of test was used in the title
+
+If paired, there will be a single box plot of the difference between x-y.
 
 # Example
 

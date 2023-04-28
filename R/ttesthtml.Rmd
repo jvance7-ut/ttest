@@ -20,21 +20,22 @@ library(ttest)
 set.seed(32); x=rnorm(30,mean=10,sd=15)
 set.seed(35); y=rnorm(30,mean=8,sd=15)
 ans1=myttest(x,y,alpha=0.05,paired = FALSE)
-attr(ans1, "class") ="Rttest"
+#attr(ans1, "class") ="Rttest"
+class(ans1)
 print(ans1)
 plot(ans1)
 
 set.seed(32); x=rnorm(30,mean=10,sd=5)
 set.seed(35); y=rnorm(30,mean=8,sd=15)
 ans2=myttest(x,y,alpha=0.05,paired = FALSE)
-attr(ans2, "class") ="Rttest"
+#attr(ans2, "class") ="Rttest"
 print(ans2)
 plot(ans2)
 
 set.seed(32); x=rnorm(30,mean=10,sd=15)
 set.seed(35); y = x+ rnorm(30, 5 ,4)
 ans3=myttest(x,y,alpha=0.05,paired = TRUE)
-attr(ans3, "class") ="Rttest"
+#attr(ans3, "class") ="Rttest"
 print(ans3)
 plot(ans3)
 

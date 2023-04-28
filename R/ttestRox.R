@@ -13,6 +13,7 @@
 #' \dontrun{myttest(x=rnorm(30,5,2), y=rnorm(30,3,2), alpha=0.05)}
 myttest = function(x, y, alpha, paired = FALSE){
   library(devtools)
+  attr(c(x,y,alpha,paired), "class") ="Rttest"
 
   if(paired==TRUE){
     ttest = t.test(x, y, paired = TRUE)
@@ -43,7 +44,7 @@ myttest = function(x, y, alpha, paired = FALSE){
   else{
     accept = "N"
   }
-
+  attr(accept, "class") ="Rttest"
   #create the data frame of x and y
   #x and y won't always be the same length and may return an error
   #check the lengths of x and y and make corrections to length if
@@ -68,8 +69,8 @@ myttest = function(x, y, alpha, paired = FALSE){
     df = data.frame(x = x, y = ytemp)
   }
 
-
+  attr(c(df, ttest,testType), "class") ="Rttest"
   #return the function information in a list
   list(Data = df, CI = ttest$conf.int, type = testType,
-       nullAccept = accept, x = x, y = y, p = paired)
+       nullAccept = accept, x = x, y = y, p = paired, ttest$statistic)
 }

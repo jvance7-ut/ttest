@@ -61,7 +61,7 @@ ui <- fluidPage(
     )
 )
 
-# Define server logic required to draw a plot, and print out df and CI
+# Define server logic required to draw a plot and print out the CI
 server <- function(input, output) {
 
     output$distPlot <- renderPlot({
@@ -75,11 +75,15 @@ server <- function(input, output) {
 
 
         # draw the plot with the specified input
-        plot(y~x,
-            main = ifelse(input$Independent == FALSE, "Paired t-test",
-                          ifelse(input$eqVar == TRUE, "Independent, Equal Var t-test",
-                                "Independent, Unequal var t-test")), col = "blue",
-                      pch=19 )
+        if(input$Independent==FALSE){
+          difference = x-y
+          boxplot(difference, main = "Paired Sample", col = "blue")
+        }
+        else{
+        boxplot(x,y,
+            main = ifelse(input$eqVar == TRUE, "Independent, Equal Var t-test",
+                          "Independent, Unequal var t-test"), col = "blue")
+        }
     })
 
 
