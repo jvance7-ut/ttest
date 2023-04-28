@@ -35,4 +35,6 @@ attr(obj, "class") ="Rttest"
 class(obj)
 print(obj)
 plot(obj)
+
+shinyOutput(obj$x, obj$y)
 ```
