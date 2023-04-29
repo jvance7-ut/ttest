@@ -13,7 +13,12 @@
 #' @examples
 #' \dontrun{print(funObject)}
 print.Rttest = function(funObject, ...){
-  library(kableExtra)
+  #For the check function
+  kableExtra = NULL
+
+  requireNamespace(kableExtra)
+
+  #Call data and CI through kable
   kFO = kable(c(funObject$Data, funObject$CI))
   kFO
 }

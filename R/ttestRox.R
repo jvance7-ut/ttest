@@ -1,4 +1,4 @@
-#' t-test final
+#' @title t-test final
 #'
 #'
 #' @param x X Vector (numeric)
@@ -7,15 +7,21 @@
 #' @param paired Is sample paired? (default FALSE)
 #'
 #' @return t-test and input results
+#' @import devtools
+#'
 #' @export myttest
 #'
 #' @examples
 #' \dontrun{myttest(x=rnorm(30,5,2), y=rnorm(30,3,2), alpha=0.05)}
 myttest = function(x, y, alpha, paired = FALSE){
-  library(devtools)
+  #for the check function
+  devtools = NULL
   t.test = NULL
   var.test = NULL
 
+  requireNamespace(devtools)
+
+  #choose the type of test to run
   if(paired==TRUE){
     ttest = t.test(x, y, paired = TRUE)
     testType = "Paired"
@@ -73,6 +79,8 @@ myttest = function(x, y, alpha, paired = FALSE){
   #return the function information in a list
   tlist = list(Data = df, CI = ttest$conf.int, type = testType,
        nullAccept = accept, x = x, y = y, p = paired, ttest$statistic)
+
+  #silently change the class to Rttest
   attr(tlist, "class") ="Rttest"
   tlist
 

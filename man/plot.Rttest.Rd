@@ -4,7 +4,7 @@
 \alias{plot.Rttest}
 \title{Plot Rttest}
 \usage{
-\method{plot}{Rttest}(funObject, i = 5, j = 6, k = 3, l = 7)
+\method{plot}{Rttest}(funObject, i = 5, j = 6, k = 3, l = 7, ...)
 }
 \arguments{
 \item{funObject}{name used when function is run}
@@ -16,6 +16,8 @@
 \item{k}{The test type (i.e. paired, t-test, or Welch)}
 
 \item{l}{TRUE/FALSE value for paired}
+
+\item{...}{Additional arguments as needed}
 }
 \value{
 box plot of x and y with test type as the title
@@ -25,4 +27,7 @@ Plot Rttest
 }
 \examples{
 \dontrun{plot(funObject)}
+}
+\author{
+Jennifer Vance
 }
