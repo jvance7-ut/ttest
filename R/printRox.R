@@ -16,9 +16,11 @@ print.Rttest = function(funObject, ...){
   #For the check function
   kableExtra = NULL
 
-  requireNamespace(kableExtra)
+  library(kableExtra)
 
   #Call data and CI through kable
   kFO = kable(c(funObject$Data, funObject$CI))
-  kFO
+  ciprint = funObject$CI
+
+  list(kFO, CI = ciprint)
 }

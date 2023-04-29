@@ -19,7 +19,7 @@ myttest = function(x, y, alpha, paired = FALSE){
   t.test = NULL
   var.test = NULL
 
-  requireNamespace(devtools)
+  library(devtools)
 
   #choose the type of test to run
   if(paired==TRUE){

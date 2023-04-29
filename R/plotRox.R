@@ -10,7 +10,7 @@
 #' @author Jennifer Vance
 #'
 #' @return box plot of x and y with test type as the title
-#' @importFrom ggplot2 ggplot geom_boxplot labs xlab
+#' @importFrom ggplot2 ggplot geom_boxplot labs xlab annotate
 #' @importFrom reshape2 melt
 #'
 #' @export plot.Rttest
@@ -28,8 +28,8 @@ plot.Rttest = function(funObject, i=5, j=6, k = 3, l = 7, ...){
   reshape2 = NULL
   ggplot2 = NULL
 
-  requireNamespace(reshape2)
-  requireNamespace(ggplot2)
+  library(reshape2)
+  library(ggplot2)
 
   #set margins to be safe
   #par(mar = c(1, 1, 1, 1))
@@ -43,8 +43,7 @@ plot.Rttest = function(funObject, i=5, j=6, k = 3, l = 7, ...){
   if(funObject[[l]]==FALSE){
   #base R plot
     plotT <- boxplot(X, Y, names= c("x", "y"),
-                main = funObject[[k]], col = "blue",
-                pch=19 )
+                main = funObject[[k]], col = "blue"  )
   #ggplot
     gplotT = ggplot(df_long, aes(x=variable, y=value)) +
       geom_boxplot(color = "green") +
@@ -56,13 +55,15 @@ plot.Rttest = function(funObject, i=5, j=6, k = 3, l = 7, ...){
     diff_long = melt(diff2)
     #base R plot
     plotT <- boxplot(diff,
-                     main = funObject[[k]], col = "blue",
-                     pch=19 )
+                     main = funObject[[k]], col = "blue")
+    text(x = 2, y = 10, labels = funObject$CI)
+
     #ggplot
     gplotT = ggplot(diff_long, aes(x=variable, y=value)) +
       xlab("Difference") +
       geom_boxplot(color = "green") +
-      labs(title = funObject[[k]])
+      labs(title = funObject[[k]])+
+      annotate(geom = "text", x=2, y= 10, label = funObject$CI)
   }
 
 
