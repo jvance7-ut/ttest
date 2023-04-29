@@ -5,7 +5,7 @@
 #' @author Jennifer Vance
 #'
 #' @return a table with the data set, the confidence interval, and hypothesis choice
-#' @importFrom kableExtra kable
+#' @importFrom kableExtra kable kable_styling
 #' @export print.Rttest
 #'
 #' @export
@@ -19,7 +19,9 @@ print.Rttest = function(funObject, ...){
   library(kableExtra)
 
   #Call data and CI through kable
-  kFO = kable(c(funObject$Data, funObject$CI))
+  #kFO = kable(c(funObject$Data, funObject$CI), booktabs = TRUE,
+  #            col.names = c("x", "y", "low", "high"))
+  kFO = kable(funObject$Data, booktabs = TRUE, col.names = c("x", "y"))
   ciprint = funObject$CI
 
   list(kFO, CI = ciprint)

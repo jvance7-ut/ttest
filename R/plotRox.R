@@ -56,14 +56,27 @@ plot.Rttest = function(funObject, i=5, j=6, k = 3, l = 7, ...){
     #base R plot
     plotT <- boxplot(diff,
                      main = funObject[[k]], col = "blue")
-    text(x = 2, y = 10, labels = funObject$CI)
+    text(x=0.99, y=0, labels = "(")
+    text(x = 1.05, y = 0, labels = round(funObject$CI[1], 4))
+    text(x=1.11, y=0, labels = ",")
+    text(x = 1.05, y = -2, labels = round(funObject$CI[2], 4))
+    text(x=1.11, y=-2, labels = ")")
 
     #ggplot
     gplotT = ggplot(diff_long, aes(x=variable, y=value)) +
       xlab("Difference") +
       geom_boxplot(color = "green") +
-      labs(title = funObject[[k]])+
-      annotate(geom = "text", x=2, y= 10, label = funObject$CI)
+      labs(title = funObject[[k]]) +
+      annotate(geom = "text", x=0.99, y=0,
+               label = "(") +
+      annotate(geom = "text", x=1.05, y= 0,
+               label = round(funObject$CI[1], 4) ) +
+      annotate(geom = "text", x=1.11, y=0,
+               label = ",") +
+      annotate(geom = "text", x = 1.05, y = -2,
+               label = round(funObject$CI[2], 4) ) +
+      annotate(geom = "text", x=1.11, y=-2,
+               label = ")")
   }
 
 

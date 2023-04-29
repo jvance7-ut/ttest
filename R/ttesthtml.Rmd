@@ -7,13 +7,15 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 
 #Installment 4 run
 
-```{r message=FALSE, warning=FALSE}
+```{r results='asis'}
 library(ttest)
+
 
 #generate x and y
 #and set alpha
