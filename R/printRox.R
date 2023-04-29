@@ -5,7 +5,7 @@
 #' @author Jennifer Vance
 #'
 #' @return a table with the data set, the confidence interval, and hypothesis choice
-#' @importFrom kableExtra kable kable_styling
+#' @importFrom kableExtra kable
 #' @export print.Rttest
 #'
 #' @export

@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-#Installment 4 run
+
 
 ```{r results='asis'}
 library(ttest)

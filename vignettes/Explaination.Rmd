@@ -89,4 +89,4 @@ If paired, there will be a single box plot of the difference between x-y.
 
 # Example
 
-`myttest(x=rnorm(30,5,2), y=rnorm(30,3,2), alpha=0.05)`
+`myttest(x=rnorm(30,5,2), y=rnorm(30,3,2), alpha=0.05, paired=TRUE)`
